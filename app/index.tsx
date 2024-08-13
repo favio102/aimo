@@ -3,6 +3,9 @@ import React from "react";
 import { StatusBar } from "expo-status-bar";
 import "../styles.css";
 import { Link } from "expo-router";
+import { NativeWindStyleSheet } from "nativewind";
+
+NativeWindStyleSheet.setOutput({ web: "native", default: "native" });
 
 const App = () => {
   return (

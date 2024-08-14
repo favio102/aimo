@@ -24,17 +24,3 @@ export interface TabIconProps {
   name: string;
   focused: boolean;
 }
-
-// export interface EnvConfig {
-//   ENDPOINT_URL: string;
-//   PLATFORM_URL: string;
-//   PROJECT_ID: string;
-//   DATABASE_ID: string;
-//   USER_COLLECTION_ID: string;
-//   VIDEOS_COLLECTION_ID: string;
-//   STORAGE_ID: string;
-// }
-
-// declare module 'react-native-config' {
-//   const config: EnvConfig;
-// }

@@ -2,15 +2,15 @@ import { View, Text, Image } from "react-native";
 import React from "react";
 import { Tabs } from "expo-router";
 import { icons } from "@/constants";
+import { TabIconProps } from "@/types";
 
-const TabIcon = ({ icon, color, name, focused }) => {
+const TabIcon = ({ icon, color, name, focused }: TabIconProps) => {
   return (
     <View className="items-center justify-center gap-2">
       <Image
         source={icon}
         resizeMode="contain"
         tintColor={color}
-        // style={{ width: 20, height: 20, tintColor: color }}
         className="w-6 h-6"
       />
       <Text

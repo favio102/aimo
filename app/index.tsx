@@ -2,12 +2,11 @@ import { Image, ScrollView, Text, View } from "react-native";
 import React from "react";
 import { StatusBar } from "expo-status-bar";
 import "../styles.css";
-import { Redirect, router } from "expo-router";
+import { router } from "expo-router";
 import { NativeWindStyleSheet } from "nativewind";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { images } from "@/constants";
 import CustomButton from "@/components/CustomButton";
-import { isLoading } from "expo-font";
 
 NativeWindStyleSheet.setOutput({ web: "native", default: "native" });
 

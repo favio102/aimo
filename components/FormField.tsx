@@ -2,6 +2,7 @@ import { View, Text, TextInput, Image } from "react-native";
 import React, { useState } from "react";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { icons } from "@/constants";
+import { FormFieldProps } from "@/types";
 
 const FormField = ({
   otherStyles,
@@ -9,8 +10,7 @@ const FormField = ({
   placeholder,
   handleChangeText,
   value,
-  ...props
-}) => {
+}: FormFieldProps) => {
   const [showPassword, setShowPassword] = useState(false);
   return (
     <View className={`space-y-2 ${otherStyles}`}>
@@ -18,7 +18,7 @@ const FormField = ({
       <View className="border-2 border-black-200 w-full h-16 px-4 bg-black-100 rounded-2xl focus:border-secondary items-center flex-row">
         <TextInput
           className="flex-1 text-white font-psemibold text-base"
-          value={value}
+          value={value.toString()}
           placeholder={placeholder}
           placeholderTextColor="#7b7b8b"
           onChangeText={handleChangeText}

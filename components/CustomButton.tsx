@@ -1,4 +1,4 @@
-import { Text, TouchableOpacity } from "react-native";
+import { Pressable, Text,  } from "react-native";
 import React from "react";
 import { CustomButtonProps } from "@/types";
 
@@ -10,7 +10,7 @@ const CustomButton = ({
   isLoading,
 }: CustomButtonProps) => {
   return (
-    <TouchableOpacity
+    <Pressable
       onPress={handlePress}
       activeOpacity={0.7}
       className={`bg-secondary rounded-xl min-h-[62px] justify-center items-center ${containerStyles} ${
@@ -21,7 +21,7 @@ const CustomButton = ({
       <Text className={`text-primary font-psemibold text-lg ${textStyles}`}>
         {title}
       </Text>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 

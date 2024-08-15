@@ -41,7 +41,7 @@ export const createUser = async (email, password, username) => {
     if (!newAccount) throw Error;
 
     const avatarUrl = avatars.getInitials(username);
-    await SignIn(email, password);
+    await signIn(email, password);
     const newUser = await databases.createDocument(
       keys.databaseId as string,
       keys.userCollectionId as string,

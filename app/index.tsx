@@ -12,8 +12,8 @@ import { useGlobalContext } from "@/context/GlobalProvider";
 NativeWindStyleSheet.setOutput({ web: "native", default: "native" });
 
 const App = () => {
-  const { isLoading, isLoggedIn } = useGlobalContext();
-  if (!isLoading && isLoggedIn) return <Redirect href="/home" />;
+  const { loading, isLogged } = useGlobalContext();
+  if (!loading && isLogged) return <Redirect href="/home" />;
   
   return (
     <SafeAreaView className="bg-primary h-full">

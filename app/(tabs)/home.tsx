@@ -54,10 +54,7 @@ const Home = () => {
         // data={[{ id: 1 }, { id: 2 }, { id: 3 }]}
         data={posts}
         keyExtractor={(item) => item.$id}
-        renderItem={({ item, index }) => (
-          <Text className="text-3xl text-white">{item.id}</Text>
-          // <VideoCard key={index} video={item}/>
-        )}
+        renderItem={({ item, index }) => <VideoCard key={index} video={item} />}
         ListEmptyComponent={() => (
           <EmptyState
             title="No Videos Found"

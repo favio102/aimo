@@ -1,12 +1,24 @@
-import { View, Text, FlatList, Image } from "react-native";
-import React from "react";
+import { View, Text, FlatList, Image, RefreshControl } from "react-native";
+import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { images } from "@/constants";
 import SearchInput from "@/components/SearchInput";
 import Trending from "@/components/Trending";
 import EmptyState from "@/components/EmptyState";
+import { getAllPosts } from "@/lib/appwrite";
+import useAppwrite from "@/lib/useAppwrite";
+import VideoCard from "@/components/VideoCard";
 
 const Home = () => {
+  const { data: posts, refetch } = useAppwrite(getAllPosts);
+  const [refreshing, setRefreshing] = useState(false);
+  const onRefresh = async () => {
+    setRefreshing(true);
+    // re call videos => if any new videos appeard
+    await refetch();
+    setRefreshing(false);
+  };
+  console.log(posts);
   return (
     <SafeAreaView className="bg-primary h-full">
       <FlatList
@@ -40,10 +52,11 @@ const Home = () => {
           </View>
         )}
         // data={[{ id: 1 }, { id: 2 }, { id: 3 }]}
-        data={[]}
+        data={posts}
         keyExtractor={(item) => item.$id}
-        renderItem={({ item }) => (
+        renderItem={({ item, index }) => (
           <Text className="text-3xl text-white">{item.id}</Text>
+          // <VideoCard key={index} video={item}/>
         )}
         ListEmptyComponent={() => (
           <EmptyState
@@ -51,6 +64,9 @@ const Home = () => {
             subtitle="Be the first one to upload a video."
           />
         )}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
       />
     </SafeAreaView>
   );

@@ -86,3 +86,15 @@ export const getCurrentUser = async () => {
     console.log(error);
   }
 };
+
+export const getAllPosts = async () => {
+  try {
+    const posts = await databases.listDocuments(
+      keys.databaseId as string,
+      keys.videosCollectionId as string
+    );
+    return posts.documents;
+  } catch (error) {
+    throw new Error(error);
+  }
+};

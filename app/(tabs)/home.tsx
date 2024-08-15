@@ -22,6 +22,18 @@ const Home = () => {
   return (
     <SafeAreaView className="bg-primary h-full">
       <FlatList
+        data={posts}
+        keyExtractor={(item) => item.$id}
+        renderItem={({ item, index }) => (
+          <VideoCard
+            key={index}
+            title={item.title}
+            thumbnail={item.thumbnail}
+            video={item.video}
+            creator={item.creator.username}
+            avatar={item.creator.avatar}
+          />
+        )}
         ListHeaderComponent={() => (
           <View className="my-6 px-4 space-y-6">
             <View className="justify-between items-start flex-row mb-6">
@@ -51,10 +63,6 @@ const Home = () => {
             </View>
           </View>
         )}
-        // data={[{ id: 1 }, { id: 2 }, { id: 3 }]}
-        data={posts}
-        keyExtractor={(item) => item.$id}
-        renderItem={({ item, index }) => <VideoCard key={index} video={item} />}
         ListEmptyComponent={() => (
           <EmptyState
             title="No Videos Found"

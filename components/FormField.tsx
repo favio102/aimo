@@ -1,6 +1,5 @@
-import { View, Text, TextInput, Image } from "react-native";
+import { View, Text, TextInput, Image, Pressable } from "react-native";
 import React, { useState } from "react";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { icons } from "@/constants";
 import { FormFieldProps } from "@/types";
 
@@ -25,13 +24,13 @@ const FormField = ({
           secureTextEntry={title === "Password" && !showPassword}
         />
         {title === "Password" && (
-          <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+          <Pressable onPress={() => setShowPassword(!showPassword)}>
             <Image
               source={!showPassword ? icons.eye : icons.eyeHide}
               className="w-6 h-6"
               resizeMode="contain"
             />
-          </TouchableOpacity>
+          </Pressable>
         )}
       </View>
     </View>

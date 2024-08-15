@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import { View, Text, Image, Pressable } from "react-native";
 import React, { useState } from "react";
 import { icons } from "@/constants";
 
@@ -53,7 +53,7 @@ const VideoCard = ({ title, thumbnail, video, creator, avatar }) => {
         // />
         <Text className="text-white">Playing</Text>
       ) : (
-        <TouchableOpacity
+        <Pressable
           activeOpacity={0.7}
           onPress={() => setPlay(true)}
           className="w-full h-60 rounded-xl mt-3 relative flex justify-center items-center"
@@ -69,7 +69,7 @@ const VideoCard = ({ title, thumbnail, video, creator, avatar }) => {
             className="w-12 h-12 absolute"
             resizeMode="contain"
           />
-        </TouchableOpacity>
+        </Pressable>
       )}
     </View>
   );

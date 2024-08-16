@@ -1,6 +1,7 @@
 import { View, Text, Image, Pressable } from "react-native";
 import React, { useState } from "react";
 import { icons } from "@/constants";
+import { ResizeMode, Video } from "expo-av";
 
 const VideoCard = ({ title, thumbnail, video, creator, avatar }) => {
   const [play, setPlay] = useState(false);
@@ -39,19 +40,19 @@ const VideoCard = ({ title, thumbnail, video, creator, avatar }) => {
       </View>
 
       {play ? (
-        // <Video
-        //   source={{ uri: video }}
-        //   className="w-full h-60 rounded-xl mt-3"
-        //   resizeMode={ResizeMode.CONTAIN}
-        //   useNativeControls
-        //   shouldPlay
-        //   onPlaybackStatusUpdate={(status) => {
-        //     if (status.didJustFinish) {
-        //       setPlay(false);
-        //     }
-        //   }}
-        // />
-        <Text className="text-white">Playing</Text>
+        <Video
+          source={{ uri: video }}
+          className="w-full h-60 rounded-xl mt-3"
+          resizeMode={ResizeMode.CONTAIN}
+          shouldPlay
+          useNativeControls
+          onPlaybackStatusUpdate={(status) => {
+            console.log("status; ", status);
+            if (status.didJustFinish) {
+              setPlay(false);
+            }
+          }}
+        />
       ) : (
         <Pressable
           activeOpacity={0.7}

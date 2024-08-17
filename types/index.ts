@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import { ImageSourcePropType } from "react-native";
 
 export interface CustomButtonProps {
@@ -23,4 +24,22 @@ export interface TabIconProps {
   color: string;
   name: string;
   focused: boolean;
+}
+
+export interface UserProps {
+  id: string;
+  name: string;
+  email: string;
+}
+
+export interface GlobalContextProps {
+  isLogged: boolean;
+  loading: boolean;
+  setIsLogged: (isLogged: boolean) => void;
+  user: UserProps | null;
+  setUser: (user: UserProps | null) => void;
+}
+
+export interface GlobalProviderProps {
+  children: ReactNode;
 }

@@ -7,11 +7,12 @@ import CustomButton from "@/components/CustomButton";
 import { Link, router } from "expo-router";
 import { getCurrentUser, signIn } from "@/lib/appwrite";
 import { useGlobalContext } from "@/context/GlobalProvider";
+import { SignInFormProps, SignInProps, UserProps } from "@/types";
 
-const SignIn = () => {
+const SignIn: React.FC<SignInProps> = () => {
   const { setUser, setIsLogged } = useGlobalContext();
-  const [submitting, setSubmitting] = useState(false);
-  const [form, setForm] = useState({
+  const [submitting, setSubmitting] = useState<boolean>(false);
+  const [form, setForm] = useState<SignInFormProps>({
     email: "",
     password: "",
   });
@@ -24,12 +25,22 @@ const SignIn = () => {
     try {
       await signIn(form.email, form.password);
       const result = await getCurrentUser();
-      setUser(result);
-      setIsLogged(true);
+
+      if (result && result.$id && result.name && result.email) {
+        const user: UserProps = {
+          id: result.id,
+          name: result.name,
+          email: result.email,
+        };
+        setUser(user);
+        setIsLogged(true);
+      } else {
+        setUser(null);
+      }
       router.replace("/home");
 
       Alert.alert("Success", "Used signed in successfully");
-    } catch (error) {
+    } catch (error: any) {
       Alert.alert("Error", error.message);
     } finally {
       setSubmitting(false);

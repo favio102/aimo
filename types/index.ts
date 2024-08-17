@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { ImageSourcePropType } from "react-native";
+import { NativeStackScreenProps } from "react-native-screens/lib/typescript/native-stack/types";
 
 export interface CustomButtonProps {
   title: string;
@@ -43,3 +44,10 @@ export interface GlobalContextProps {
 export interface GlobalProviderProps {
   children: ReactNode;
 }
+
+export interface SignInFormProps {
+  email: string;
+  password: string;
+}
+
+export type SignInProps = NativeStackScreenProps<{}, "SignIn">;

@@ -21,8 +21,13 @@ export const GlobalProvider: React.FC<GlobalProviderProps> = ({ children }) => {
     getCurrentUser()
       .then((res) => {
         if (res) {
+          const UserData: UserProps = {
+            id: res.$id,
+            name: res.name,
+            email: res.email,
+          };
           setIsLogged(true);
-          setUser(res);
+          setUser(UserData);
         } else {
           setIsLogged(false);
           setUser(null);

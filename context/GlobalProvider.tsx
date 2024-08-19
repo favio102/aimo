@@ -25,6 +25,7 @@ export const GlobalProvider: React.FC<GlobalProviderProps> = ({ children }) => {
             id: res.$id,
             name: res.name,
             email: res.email,
+            avatar: res.avatar,
           };
           setIsLogged(true);
           setUser(UserData);

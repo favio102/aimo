@@ -2,7 +2,7 @@ import { View, FlatList, Pressable, Image } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import EmptyState from "@/components/EmptyState";
-import { getUserPosts } from "@/lib/appwrite";
+import { getUserPosts, signOut } from "@/lib/appwrite";
 import useAppwrite from "@/lib/useAppwrite";
 import VideoCard from "@/components/VideoCard";
 import { useGlobalContext } from "@/context/GlobalProvider";
@@ -12,9 +12,9 @@ import { router } from "expo-router";
 
 const Profile = () => {
   const { user, setUser, setIsLogged } = useGlobalContext();
-  const { data: posts } = useAppwrite(() => getUserPosts(user.$id));
+  const { data: posts } = useAppwrite(() => getUserPosts(user?.$id));
   const logout = async () => {
-    // await signOut();
+    await signOut();
     setUser(null);
     setIsLogged(false);
     router.replace("/sign-in");
@@ -25,14 +25,14 @@ const Profile = () => {
       <FlatList
         data={posts}
         keyExtractor={(item) => item.$id}
-        renderItem={({ item, index }) => (
+        renderItem={({ item }) => (
           <VideoCard
-            key={index}
-            title={item.title}
-            thumbnail={item.thumbnail}
-            video={item.video}
-            creator={item.creator.username}
-            avatar={item.creator.avatar}
+            video={video}
+            // key={index}
+            // title={item.title}
+            // thumbnail={item.thumbnail}
+            // creator={item.creator.username}
+            // avatar={item.creator.avatar}
           />
         )}
         ListEmptyComponent={() => (
@@ -52,7 +52,7 @@ const Profile = () => {
             </Pressable>
             <View className="w-16 h-16 border border-secondary rounded-lg justify-center items-center">
               <Image
-                source={{ uri: user.avatar }}
+                source={{ uri: user?.avatar }}
                 className="w-[90%] h-[90%] rounded-lg"
                 resizeMode="cover"
               />

@@ -8,11 +8,17 @@ import VideoCard from "@/components/VideoCard";
 import { useGlobalContext } from "@/context/GlobalProvider";
 import { icons } from "@/constants";
 import InfoBox from "@/components/InfoBox";
+import { router } from "expo-router";
 
 const Profile = () => {
-  const { user, setUser, setIsLoggedIn } = useGlobalContext();
+  const { user, setUser, setIsLogged } = useGlobalContext();
   const { data: posts } = useAppwrite(() => getUserPosts(user.$id));
-  const logout = () => {};
+  const logout = async () => {
+    // await signOut();
+    setUser(null);
+    setIsLogged(false);
+    router.replace("/sign-in");
+  };
 
   return (
     <SafeAreaView className="bg-primary h-full">
@@ -29,9 +35,15 @@ const Profile = () => {
             avatar={item.creator.avatar}
           />
         )}
+        ListEmptyComponent={() => (
+          <EmptyState
+            title="No Videos Found"
+            subtitle="No videos found for this profile."
+          />
+        )}
         ListHeaderComponent={() => (
-          <View className="w-full justify-center items-center mt-6 mb-12 px-4">
-            <Pressable className="w-full items-end mb-10" onPress={logout}>
+          <View className="w-full flex justify-center items-center mt-6 mb-12 px-4">
+            <Pressable className="flex w-full items-end mb-10" onPress={logout}>
               <Image
                 source={icons.logout}
                 resizeMode="contain"
@@ -50,27 +62,20 @@ const Profile = () => {
               containerStyles="mt-5"
               titleStyles="text-lg"
             />
-            <View className="mt-5 flex-row">
+            <View className="mt-5 flex flex-row">
               <InfoBox
                 title={posts.length || 0}
                 subtitle="Posts"
-                containerStyles="mt-10"
+                containerStyles="mr-10"
                 titleStyles="text-xl"
               />
               <InfoBox
                 title="1.2K"
                 subtitle="Followers"
-                containerStyles="mt-5"
                 titleStyles="text-xl"
               />
             </View>
           </View>
-        )}
-        ListEmptyComponent={() => (
-          <EmptyState
-            title="No Videos Found"
-            subtitle="No videos found for this search query."
-          />
         )}
       />
     </SafeAreaView>

@@ -27,7 +27,7 @@ const SignUp = () => {
       setUser(result);
       setIsLogged(true);
       router.replace("/home");
-    } catch (error) {
+    } catch (error: any) {
       Alert.alert("Error", error.message);
     } finally {
       setIsSubmitting(false);

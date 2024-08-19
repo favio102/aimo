@@ -54,7 +54,7 @@ export const createUser = async (email, password, username) => {
       }
     );
     return newUser;
-  } catch (error) {
+  } catch (error: any) {
     console.log(error);
     throw new Error(error);
   }
@@ -64,7 +64,7 @@ export const signIn = async (email, password) => {
   try {
     const session = await account.createEmailPasswordSession(email, password);
     return session;
-  } catch (error) {
+  } catch (error: any) {
     console.log(error);
     throw new Error(error);
   }
@@ -82,7 +82,7 @@ export const getCurrentUser = async () => {
 
     if (!currentUser) throw Error;
     return currentUser.documents[0];
-  } catch (error) {
+  } catch (error: any) {
     console.log(error);
   }
 };
@@ -94,7 +94,7 @@ export const getAllPosts = async () => {
       keys.videosCollectionId as string
     );
     return posts.documents;
-  } catch (error) {
+  } catch (error: any) {
     throw new Error(error);
   }
 };
@@ -107,7 +107,7 @@ export const getLatestPosts = async () => {
       [Query.orderDesc("$createdAt"), Query.limit(7)]
     );
     return posts.documents;
-  } catch (error) {
+  } catch (error: any) {
     throw new Error(error);
   }
 };
@@ -120,7 +120,7 @@ export const searchPosts = async (query) => {
       [Query.search("title", query)]
     );
     return posts.documents;
-  } catch (error) {
+  } catch (error: any) {
     throw new Error(error);
   }
 };
@@ -133,7 +133,7 @@ export const getUserPosts = async (userId) => {
       [Query.equal("creator", userId)]
     );
     return posts.documents;
-  } catch (error) {
+  } catch (error: any) {
     throw new Error(error);
   }
 };

@@ -58,3 +58,25 @@ export interface InfoBoxProps {
   containerStyles?: string;
   titleStyles?: string;
 }
+
+export interface EmptyStateProps {
+  title: string;
+  subtitle: string;
+}
+
+export interface SearchInputProps {
+  initialQuery: string;
+}
+
+export interface TrendingItemProps {
+  activeItem: boolean;
+  item: string;
+}
+
+export interface VideoCardProps {
+  title: string;
+  thumbnail: string;
+  video: string;
+  creator: string;
+  avatar: string;
+}

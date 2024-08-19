@@ -1,13 +1,9 @@
-import {
-  FlatList,
-  ImageBackground,
-  Image,
-  Pressable,
-} from "react-native";
+import { FlatList, ImageBackground, Image, Pressable } from "react-native";
 import React, { useCallback, useState } from "react";
 import * as Animatable from "react-native-animatable";
 import { icons } from "@/constants";
 import { ResizeMode, Video } from "expo-av";
+import { TrendingItemProps } from "@/types";
 
 const zoomIn = {
   0: { scale: 0.9 },
@@ -18,7 +14,7 @@ const zoomOut = {
   1: { scale: 0.9 },
 };
 
-const TrendingItem = ({ activeItem, item }) => {
+const TrendingItem = ({ activeItem, item }: TrendingItemProps) => {
   const [play, setPlay] = useState(false);
 
   return (

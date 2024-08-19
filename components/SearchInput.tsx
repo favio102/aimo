@@ -2,9 +2,10 @@ import { View, TextInput, Image, Pressable, Alert } from "react-native";
 import React, { useState } from "react";
 import { icons } from "@/constants";
 import { router, usePathname } from "expo-router";
+import { SearchInputProps } from "@/types";
 // import { SearchInputProps } from "@/types";
 
-const SearchInput = ({ initialQuery }) => {
+const SearchInput = ({ initialQuery }: SearchInputProps) => {
   const pathname = usePathname();
   const [query, setQuery] = useState(initialQuery || "");
 

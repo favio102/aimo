@@ -3,8 +3,9 @@ import React from "react";
 import { images } from "@/constants";
 import CustomButton from "./CustomButton";
 import { router } from "expo-router";
+import { EmptyStateProps } from "@/types";
 
-const EmptyState = ({ title, subtitle }) => {
+const EmptyState = ({ title, subtitle }: EmptyStateProps) => {
   return (
     <View className="justify-center items-center px-4">
       <Image

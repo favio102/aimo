@@ -16,28 +16,32 @@ const App = () => {
   if (!loading && isLogged) return <Redirect href="/home" />;
 
   return (
-    <SafeAreaView className="bg-primary h-full">
+    <SafeAreaView className="bg-black h-full">
       <ScrollView contentContainerStyle={{ height: "100%" }}>
         <View className="w-full justify-center items-center h-full px-4">
-          {/* <Image
-            source={images.logo}
-            className="w-[130px] h-[84px]"
-            resizeMode="contain"
-          /> */}
-          <View className="relative mb-7">
-            <Text className="text-5xl text-gray-200 font-bold text-center">
-              CERO
-            </Text>
+          <View className="flex flex-row mb-8">
+            <Image
+              source={images.logo}
+              className="w-[85px] h-[85px]"
+              resizeMode="contain"
+            />
+            <View className="relative">
+              <Text className="text-4xl text-red-800 font-bold text-center">
+                CE
+                <br />
+                RO
+              </Text>
+            </View>
           </View>
           <Image
             source={images.cards}
-            className="max-w-[380px] w-full h-[300px] rounded-l-3xl"
+            className="max-w-[300px] w-full h-[300px] rounded-3xl"
             resizeMode="contain"
           />
           <View className="relative mt-5">
             <Text className="text-3xl text-white font-bold text-center">
               Discover Endless Possibilities with{" "}
-              <Text className="text-secondary-200">CERO</Text>
+              <Text className="text-red-800">CERO</Text>
             </Text>
             <Image
               source={images.path}

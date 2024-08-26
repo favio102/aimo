@@ -23,7 +23,7 @@ export const GlobalProvider: React.FC<GlobalProviderProps> = ({ children }) => {
         if (res) {
           const UserData: UserProps = {
             id: res.$id,
-            name: res.name,
+            name: res.username,
             email: res.email,
             avatar: res.avatar,
           };

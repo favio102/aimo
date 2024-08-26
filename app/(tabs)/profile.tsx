@@ -13,6 +13,8 @@ import { router } from "expo-router";
 const Profile = () => {
   const { user, setUser, setIsLogged } = useGlobalContext();
   const { data: posts } = useAppwrite(() => getUserPosts(user?.$id));
+  console.log(posts);
+  
   const logout = async () => {
     await signOut();
     setUser(null);
@@ -24,10 +26,10 @@ const Profile = () => {
     <SafeAreaView className="bg-primary h-full">
       <FlatList
         data={posts}
-        keyExtractor={(item) => item.$id}
+        keyExtractor={(item) => item?.$id}
         renderItem={({ item }) => (
           <VideoCard
-            video={video}
+            video={item}
             // key={index}
             // title={item.title}
             // thumbnail={item.thumbnail}
@@ -58,7 +60,7 @@ const Profile = () => {
               />
             </View>
             <InfoBox
-              title={user?.username}
+              title={user?.name}
               containerStyles="mt-5"
               titleStyles="text-lg"
             />

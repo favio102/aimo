@@ -54,7 +54,7 @@ export interface SignInFormProps {
 export type SignInProps = NativeStackScreenProps<{}, "SignIn">;
 
 export interface InfoBoxProps {
-  title: string | number;
+  title?: string | number;
   subtitle?: string;
   containerStyles?: string;
   titleStyles?: string;

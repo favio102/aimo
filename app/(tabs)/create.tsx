@@ -3,19 +3,13 @@ import { router } from "expo-router";
 import { ResizeMode, Video } from "expo-av";
 import * as DocumentPicker from "expo-document-picker";
 import { SafeAreaView } from "react-native-safe-area-context";
-import {
-  View,
-  Text,
-  Alert,
-  Image,
-  Pressable,
-  ScrollView,
-} from "react-native";
+import { View, Text, Alert, Image, Pressable, ScrollView } from "react-native";
 
 import { icons } from "../../constants";
 import { createVideoPost } from "../../lib/appwrite";
-import { CustomButton, FormField } from "../../components";
 import { useGlobalContext } from "../../context/GlobalProvider";
+import CustomButton from "@/components/CustomButton";
+import FormField from "@/components/FormField";
 
 const Create = () => {
   const { user } = useGlobalContext();
@@ -26,6 +20,70 @@ const Create = () => {
     thumbnail: null,
     prompt: "",
   });
+
+  const openPicker = async (selectType) => {
+    const result = await DocumentPicker.getDocumentAsync({
+      type:
+        selectType === "image"
+          ? ["image/png", "image/jpg"]
+          : ["video/mp4", "video/gif"],
+    });
+
+    if (!result.canceled) {
+      if (selectType === "image") {
+        setForm({
+          ...form,
+          thumbnail: result.assets[0],
+        });
+      }
+
+      if (selectType === "video") {
+        setForm({
+          ...form,
+          video: result.assets[0],
+        });
+      }
+    } else {
+      setTimeout(() => {
+        Alert.alert("Document picked", JSON.stringify(result, null, 2));
+      }, 100);
+    }
+  };
+
+  const submit = async () => {
+    if (
+      form.prompt === "" ||
+      form.title === "" ||
+      !form.thumbnail ||
+      !form.video
+    ) {
+      return Alert.alert("Please provide all fields");
+    }
+    console.log("form data before submission", form);
+
+    setUploading(true);
+    try {
+      await createVideoPost({
+        ...form,
+        userId: user.$id,
+      });
+
+      Alert.alert("Success", "Post uploaded successfully");
+      router.push("/home");
+    } catch (error: any) {
+      console.error("error during video post creation", error.message);
+      Alert.alert("Error", error.message);
+    } finally {
+      setForm({
+        title: "",
+        video: null,
+        thumbnail: null,
+        prompt: "",
+      });
+
+      setUploading(false);
+    }
+  };
 
   return (
     <SafeAreaView className="bg-primary h-full">
@@ -50,9 +108,7 @@ const Create = () => {
               <Video
                 source={{ uri: form.video.uri }}
                 className="w-full h-64 rounded-2xl"
-                useNativeControls
                 resizeMode={ResizeMode.COVER}
-                isLooping
               />
             ) : (
               <View className="w-full h-40 px-4 bg-black-100 rounded-2xl border border-black-200 flex justify-center items-center">
